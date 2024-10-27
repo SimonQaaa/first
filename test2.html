@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            background-size: 100% 100%;
+            height: 100vh;
+            margin: 0px;
+            background-color: aliceblue;
+            background-image: url(back.png); 
+        }
+        .input_{
+            display: flex;
+            align-items: center;
+            z-index: 1;
+        }
+        #inputContent{
+            border:0;
+            border-bottom: 2px solid #bac517;
+            padding: 4px 2px;
+            background: 0;
+            display: block;
+            line-height: 1.5;
+            text-align: center;
+            font-size: 2rem;
+            color:#bac517;
+            
+            width: auto;
+            outline:none;
+        }
+        #inputContent::placeholder{
+            color:#bac517;
+            
+        }
+        #datetime{
+            display: flex;
+            z-index: 2;
+            justify-content: center;
+            margin: 105px 50px 0px 0px;
+            position: fixed;
+            font-size: 3rem;
+            color: #bac517;
+        }
+        #save{
+            width: 40px;
+            height: 40px;
+            font-size: 32px;
+            margin-left: -50px;
+            color: #bac517;
+            cursor: pointer;
+        }
+        #add{
+            width: 40px;
+            height: 40px;
+            font-size: 32px;
+            color: #bac517;
+            cursor: pointer;
+        }
+        @media (max-width: 800px) {
+        .tp {
+          height: 100vh;
+          background-image: url(back.png);
+        }
+      }
+    </style>
+</head>
+
+<body class = "tp" onload = getTime()>
+    <div id="datetime"></div>
+    <div class="input_">
+        <input type="" placeholder="今天要做什么" id="inputContent">
+        <span id="save" onclick="change()">✔</span>
+        <div id="add">+</div>
+    </div>
+    <script>
+        let flag = false;
+        function change() {
+            let save = document.getElementById("save")
+            let inputContent = document.getElementById("inputContent")
+            if (flag) {
+                flag = false;
+                save.innerHTML = "✔";
+                inputContent.style.borderBottomColor = '#bac517';
+                inputContent.value=""
+                inputContent.readOnly=false;
+                window.localStorage.removeItem("shi")
+            } else {
+                flag = true;
+                save.innerHTML = "✘";
+                inputContent.style.borderBottomColor = "transparent";
+                inputContent.readOnly=true;
+                window.localStorage.setItem("shi", inputContent.value)
+            }
+        }
+        
+        let data = window.localStorage.getItem("shi");
+        if (data) {
+            document.getElementById("inputContent").value = data;
+            change();
+        }
+
+        function getTime() {
+            let date = new Date();
+            let d1 = date.toLocaleString();
+            let h = date.getHours();
+            let m = date.getMinutes()
+            let s = date.getSeconds()
+            document.getElementById("datetime").innerHTML = d1;
+            t = setTimeout(function() {
+                getTime(), 500;
+            });
+        }
+    </script>
+</body>
+</html>
