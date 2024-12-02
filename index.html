@@ -43,6 +43,7 @@
             height: 80%;
             width: auto;
             left: 10%;
+            cursor: pointer;
         }
 
         .header_model {
@@ -270,12 +271,12 @@
                 </a>
             </div>
             <div class="top_icon">
-                <a href="https://bilibili.com" target="_blank">
+                <a href="https://space.bilibili.com/441515999" target="_blank">
                     <img src="img/bilibili.png" alt="">
                 </a>
             </div>
             <div class="top_icon">
-                <a href="https://douyin.com" target="_blank">
+                <a href="https://www.douyin.com/user/self?from_tab_name=main" target="_blank">
                     <img src="img/douyin.png" alt="">
                 </a>
             </div>
@@ -370,6 +371,13 @@
                 // this.style.color = 'white';
                 this.classList.add('black')
                 console.log(header_text);
+            })
+        })
+
+        const moon = document.querySelector('.logo');
+        moon.addEventListener('click', function() {
+            header_texts.forEach(function(header_text) {
+                header_text.classList.remove('black');
             })
         })
     </script>
